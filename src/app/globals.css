@@ -1,26 +1,120 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-brand: #166534;
+  --color-brand-dark: #14532d;
+  --color-brand-mid: #15803d;
+  --color-brand-light: #dcfce7;
+  --font-sans: var(--font-noto), "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  --font-accent: var(--font-montserrat), sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: #1a1a1a;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
+}
+
+/* Montserrat を使う要素 */
+.font-accent {
+  font-family: var(--font-accent);
+}
+
+/* ── 共通：セクション見出し ─────────────────── */
+.sec-label {
+  display: block;
+  font-family: var(--font-accent);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: #166534;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+}
+
+.sec-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.4;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #166534;
+  display: inline-block;
+}
+
+@media (min-width: 1024px) {
+  .sec-title { font-size: 1.875rem; }
+}
+
+/* ── 共通：左ボーダー見出し ─────────────────── */
+.side-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.side-title::before {
+  content: "";
+  display: block;
+  width: 4px;
+  min-height: 100%;
+  background: #166534;
+  border-radius: 2px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+/* ── ボタン ──────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  background: #166534;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: 2px solid #166534;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #14532d;
+  border-color: #14532d;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  background: transparent;
+  color: #166534;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: 2px solid #166534;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+}
+
+.btn-outline:hover {
+  background: #166534;
+  color: #fff;
+}
+
+/* ── カード ──────────────────────────────── */
+.corp-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-top: 3px solid #166534;
+  padding: 1.5rem;
 }

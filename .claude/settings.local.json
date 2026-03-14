@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "WebFetch(domain:gong-rong-zhi-ye-hp.replit.app)",
+      "WebFetch(domain:www.kyoei-wastepaper.com)",
+      "WebSearch"
+    ]
+  }
+}
