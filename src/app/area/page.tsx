@@ -7,7 +7,7 @@ const BASE_URL = "https://kyoei-shigyo.jp";
 
 export const metadata: Metadata = {
   title: "対応エリア",
-  description: "共栄紙業の資源・廃棄物回収エリア。兵庫県（尼崎・神戸・西宮・宝塚・川西・芦屋・伊丹・姫路・明石・高砂ほか）・大阪府（大阪・豊中・吹田・池田）対応。廃棄物管理・BPOは全国対応。",
+  description: "共栄紙業の資源・廃棄物回収エリア。兵庫県（尼崎・神戸・西宮・宝塚・川西・芦屋・伊丹・姫路・明石・加古川ほか）・大阪府（大阪・豊中・吹田・池田）対応。廃棄物管理・BPOは全国対応。",
   alternates: { canonical: `${BASE_URL}/area` },
   openGraph: {
     title: "対応エリア | 共栄紙業株式会社",
@@ -24,7 +24,7 @@ const osakaCities = cities.filter((c) => c.pref === "大阪府");
 
 // 詳細ページなし（テキストのみ）の対応エリア
 const hyogoOther = [
-  "加古川市", "加西市", "西脇市", "その他兵庫県内（要相談）",
+  "高砂市", "加西市", "西脇市", "その他兵庫県内（要相談）",
 ];
 const osakaOther = [
   "堺市", "東大阪市", "高槻市", "枚方市", "茨木市", "箕面市",

@@ -215,7 +215,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-white" />
         <div
           className="absolute inset-0 bg-green-50"
-          style={{ clipPath: "polygon(0 0, 62% 0, 48% 100%, 0 100%)" }}
+          style={{ clipPath: "polygon(0 0, 25% 0, 8% 100%, 0 100%)" }}
         />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
@@ -253,7 +253,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gray-50" />
         <div
           className="absolute inset-0 bg-green-50"
-          style={{ clipPath: "polygon(50% 0, 100% 0, 100% 100%, 36% 100%)" }}
+          style={{ clipPath: "polygon(75% 0, 100% 0, 100% 100%, 92% 100%)" }}
         />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-10">
@@ -293,7 +293,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-white" />
         <div
           className="absolute inset-0 bg-green-50"
-          style={{ clipPath: "polygon(0 0, 62% 0, 48% 100%, 0 100%)" }}
+          style={{ clipPath: "polygon(0 0, 25% 0, 8% 100%, 0 100%)" }}
         />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-[280px_1fr] lg:gap-16 items-start">
@@ -394,7 +394,7 @@ export default function Home() {
               <span className="font-bold text-white text-sm">主な対応エリア</span>
             </div>
             <div className="flex flex-wrap gap-2">
-              {["神戸市", "尼崎市", "西宮市", "芦屋市", "姫路市", "明石市", "高砂市", "加古川市", "大阪市", "堺市", "東大阪市", "豊中市", "吹田市", "京都市", "奈良市", "大津市"].map((area) => (
+              {["神戸市", "尼崎市", "西宮市", "芦屋市", "姫路市", "明石市", "加古川市", "大阪市", "堺市", "東大阪市", "豊中市", "吹田市", "京都市", "奈良市", "大津市"].map((area) => (
                 <span key={area} className="bg-gray-800 text-gray-300 text-xs px-3 py-1 font-medium">{area}</span>
               ))}
               <Link href="/area" className="text-green-400 text-xs font-semibold px-2 py-1 hover:underline">
