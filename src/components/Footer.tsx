@@ -1,45 +1,62 @@
 import Link from "next/link";
+import Image from "next/image";
 
-const navLinks = [
-  { href: "/service", label: "サービス" },
-  { href: "/items", label: "回収できるもの" },
-  { href: "/area", label: "回収エリア" },
-  { href: "/results", label: "実績" },
-  { href: "/factory", label: "工場紹介" },
-  { href: "/flow", label: "回収の流れ" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/contact", label: "お問い合わせ" },
+const sitemapGroups = [
+  {
+    label: "サービス",
+    links: [
+      { href: "/service", label: "リサイクル・処分" },
+      { href: "/service/waste-management", label: "廃棄物管理" },
+      { href: "/service/bpo", label: "BPO（事務作業代行）" },
+    ],
+  },
+  {
+    label: "情報",
+    links: [
+      { href: "/area", label: "回収エリア" },
+      { href: "/items", label: "回収品目" },
+      { href: "/pricing", label: "料金" },
+      { href: "/faq", label: "FAQ" },
+      { href: "/contact", label: "お問い合わせ" },
+    ],
+  },
+  {
+    label: "会社情報",
+    links: [
+      { href: "/company", label: "会社概要" },
+      { href: "/factory", label: "工場紹介" },
+      { href: "/recruit", label: "採用情報" },
+      { href: "/blog", label: "コラム" },
+    ],
+  },
 ];
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-400">
+    <footer className="bg-gray-900 text-gray-400" style={{ borderTop: "3px solid #4b5cc4" }}>
       {/* Main footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-14">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_auto] gap-10 lg:gap-16">
           {/* Company */}
           <div>
-            <div className="flex items-center gap-2.5 mb-5">
-              <div className="w-7 h-7 bg-green-700 flex items-center justify-center shrink-0">
-                <svg aria-hidden="true" focusable="false" className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
-                </svg>
+            <div className="mb-5">
+              <div className="mb-3">
+                <Image
+                  src="/logo-transparent.png"
+                  alt="共栄紙業株式会社"
+                  width={160}
+                  height={48}
+                  className="h-10 w-auto object-contain"
+                />
               </div>
-              <div>
-                <div className="text-white font-bold text-sm">共栄紙業株式会社</div>
-                <div className="font-accent text-gray-500 text-xs tracking-widest">KYOEI SHIGYO CO., LTD.</div>
-              </div>
+              <p className="text-white font-bold text-xl tracking-wide">共栄紙業株式会社</p>
             </div>
 
             <div className="space-y-1.5 text-xs leading-relaxed mb-5">
-              <p>〒xxx-xxxx　兵庫県○○市○○町x-x-x</p>
+              <p className="text-gray-400">〒661-0033　兵庫県尼崎市南武庫之荘10丁目7番9号</p>
               <p>
                 <span className="text-gray-500 mr-2">TEL</span>
-                <span className="text-gray-300">078-xxx-xxxx</span>
-              </p>
-              <p>
-                <span className="text-gray-500 mr-2">FAX</span>
-                <span className="text-gray-300">078-xxx-xxxx</span>
+                <span className="text-gray-300">06-6437-0180</span>
               </p>
               <p>
                 <span className="text-gray-500 mr-2">受付時間</span>
@@ -47,28 +64,37 @@ export default function Footer() {
               </p>
             </div>
 
-            <p className="text-xs leading-relaxed">
-              兵庫・大阪を中心に創業40年。古紙・資源リサイクルを通じて
-              企業の持続可能な廃棄物管理をサポートしています。
+            <p className="text-xs text-gray-500 leading-relaxed">
+              関西を中心に創業70年。<br />
+              古紙・資源リサイクルを通じて<br />
+              企業の持続可能な廃棄物管理を<br />
+              サポートしています。
             </p>
           </div>
 
           {/* Sitemap */}
           <div>
             <h3 className="font-accent text-gray-200 text-xs font-bold tracking-widest mb-4 uppercase">Sitemap</h3>
-            <ul className="space-y-2.5">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-xs text-gray-400 hover:text-green-400 transition-colors flex items-center gap-1.5"
-                  >
-                    <span className="w-3 h-px bg-gray-600 inline-block" />
-                    {link.label}
-                  </Link>
-                </li>
+            <div className="flex gap-8 lg:gap-10">
+              {sitemapGroups.map((group) => (
+                <div key={group.label}>
+                  <p className="text-gray-500 text-xs font-bold mb-3 uppercase tracking-wider">{group.label}</p>
+                  <ul className="space-y-2.5">
+                    {group.links.map((link) => (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          className="text-xs text-gray-400 hover:text-green-400 transition-colors flex items-center gap-1.5"
+                        >
+                          <span className="w-3 h-px bg-gray-600 inline-block" />
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
 
           {/* Contact */}
@@ -76,7 +102,7 @@ export default function Footer() {
             <h3 className="font-accent text-gray-200 text-xs font-bold tracking-widest mb-4 uppercase">Contact</h3>
             <div className="bg-gray-800 p-5 mb-4 min-w-[200px]">
               <p className="text-gray-500 text-xs mb-1">お電話でのお問い合わせ</p>
-              <p className="font-accent text-white font-bold text-xl tracking-wide">078-xxx-xxxx</p>
+              <p className="font-accent text-white font-bold text-xl tracking-wide">06-6437-0180</p>
               <p className="text-gray-500 text-xs mt-1">平日 8:00〜17:00</p>
             </div>
             <Link

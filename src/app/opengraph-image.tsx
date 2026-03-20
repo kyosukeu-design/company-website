@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "共栄紙業株式会社 | 兵庫・大阪の古紙・資源リサイクル専門";
+export const alt = "共栄紙業株式会社 | 関西の古紙・資源リサイクル専門";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -68,9 +68,9 @@ export default function OgImage() {
               marginBottom: "24px",
             }}
           >
-            兵庫・大阪の
+            関西の古紙・資源リサイクル専門
             <br />
-            古紙・資源リサイクル専門
+            廃棄物管理は全国対応
           </div>
           <div style={{ color: "#6b7280", fontSize: "26px", lineHeight: 1.6 }}>
             古紙回収 / 機密書類処理 / 金属スクラップ回収 / 産業廃棄物収集運搬
@@ -98,7 +98,7 @@ export default function OgImage() {
               letterSpacing: "0.05em",
             }}
           >
-            無料でお問い合わせ
+            お問い合わせ
           </div>
         </div>
       </div>

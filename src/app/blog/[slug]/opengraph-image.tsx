@@ -121,7 +121,7 @@ export default async function OgImage({
               padding: "8px 24px",
             }}
           >
-            無料でお問い合わせ
+            お問い合わせ
           </div>
         </div>
       </div>

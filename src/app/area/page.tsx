@@ -7,7 +7,7 @@ const BASE_URL = "https://kyoei-shigyo.jp";
 
 export const metadata: Metadata = {
   title: "対応エリア",
-  description: "共栄紙業の古紙・資源回収エリア。兵庫県（尼崎・神戸・西宮・宝塚・川西・芦屋・伊丹・猪名川・三田）・大阪府（大阪・豊中・吹田・池田）対応。廃棄物管理・BPOは全国対応。",
+  description: "共栄紙業の資源・廃棄物回収エリア。兵庫県（尼崎・神戸・西宮・宝塚・川西・芦屋・伊丹・姫路・明石・高砂ほか）・大阪府（大阪・豊中・吹田・池田）対応。廃棄物管理・BPOは全国対応。",
   alternates: { canonical: `${BASE_URL}/area` },
   openGraph: {
     title: "対応エリア | 共栄紙業株式会社",
@@ -24,7 +24,7 @@ const osakaCities = cities.filter((c) => c.pref === "大阪府");
 
 // 詳細ページなし（テキストのみ）の対応エリア
 const hyogoOther = [
-  "明石市", "加古川市", "高砂市", "姫路市", "加西市", "西脇市", "その他兵庫県内（要相談）",
+  "加古川市", "加西市", "西脇市", "その他兵庫県内（要相談）",
 ];
 const osakaOther = [
   "堺市", "東大阪市", "高槻市", "枚方市", "茨木市", "箕面市",
@@ -99,7 +99,7 @@ export default function AreaPage() {
           <div className="mb-16">
             <div className="mb-4">
               <span className="sec-label">Collection Area</span>
-              <h2 className="sec-title">古紙・資源回収エリア</h2>
+              <h2 className="sec-title">資源・廃棄物回収エリア</h2>
               <p className="text-gray-500 text-sm mt-2">
                 各エリアの詳細ページでは、対応サービスの内容・料金・地域の業者情報を確認できます。
               </p>
@@ -111,6 +111,7 @@ export default function AreaPage() {
               <span className="bg-green-700 text-white text-xs px-3 py-1 font-semibold">大阪府 全域</span>
               <span className="bg-gray-200 text-gray-600 text-xs px-3 py-1">京都府（一部）</span>
               <span className="bg-gray-200 text-gray-600 text-xs px-3 py-1">奈良県（一部）</span>
+              <span className="bg-gray-200 text-gray-600 text-xs px-3 py-1">滋賀県（一部）</span>
               <span className="text-xs text-gray-400">※ エリア外でも対応できる場合があります</span>
             </div>
 
@@ -132,7 +133,7 @@ export default function AreaPage() {
                   <div key={city.slug} className="bg-white border-t-2 border-green-700">
                     {/* エリア名 → /[city] */}
                     <Link
-                      href={`/${city.slug}`}
+                      href={`/area/${city.slug}`}
                       className="flex items-center justify-between px-5 py-3.5 hover:bg-green-50 transition-colors group border-b border-gray-100"
                     >
                       <div>
@@ -149,7 +150,7 @@ export default function AreaPage() {
                       {serviceItems.map((item) => (
                         <Link
                           key={item.slug}
-                          href={`/${city.slug}/${item.slug}`}
+                          href={`/area/${city.slug}/${item.slug}`}
                           className="flex items-center gap-1.5 text-xs text-gray-600 hover:text-green-700 transition-colors group/link py-0.5"
                         >
                           <span className="w-1 h-1 bg-green-500 shrink-0 group-hover/link:bg-green-700 transition-colors" />
@@ -192,7 +193,7 @@ export default function AreaPage() {
                 {osakaCities.map((city) => (
                   <div key={city.slug} className="bg-white border-t-2 border-green-700">
                     <Link
-                      href={`/${city.slug}`}
+                      href={`/area/${city.slug}`}
                       className="flex items-center justify-between px-5 py-3.5 hover:bg-green-50 transition-colors group border-b border-gray-100"
                     >
                       <div>
@@ -208,7 +209,7 @@ export default function AreaPage() {
                       {serviceItems.map((item) => (
                         <Link
                           key={item.slug}
-                          href={`/${city.slug}/${item.slug}`}
+                          href={`/area/${city.slug}/${item.slug}`}
                           className="flex items-center gap-1.5 text-xs text-gray-600 hover:text-green-700 transition-colors group/link py-0.5"
                         >
                           <span className="w-1 h-1 bg-green-500 shrink-0 group-hover/link:bg-green-700 transition-colors" />
@@ -233,52 +234,29 @@ export default function AreaPage() {
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* ── エリア×サービス マトリクス ── */}
-          <div className="mb-10">
-            <div className="mb-6">
-              <span className="sec-label">Service Matrix</span>
-              <h2 className="sec-title">エリア別サービス一覧</h2>
-              <p className="text-gray-500 text-sm mt-2">各エリアで対応しているサービスの詳細ページへ直接アクセスできます。</p>
-            </div>
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse min-w-[640px]">
-                <thead>
-                  <tr className="bg-gray-900">
-                    <th className="text-left px-4 py-3 text-xs font-accent text-gray-400 tracking-widest w-32">エリア</th>
-                    {serviceItems.map((item) => (
-                      <th key={item.slug} className="px-4 py-3 text-center text-xs font-semibold text-white">
-                        {item.shortName}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200">
-                  {cities.map((city) => (
-                    <tr key={city.slug} className="bg-white hover:bg-green-50 transition-colors group">
-                      <td className="px-4 py-3">
-                        <Link
-                          href={`/${city.slug}`}
-                          className="text-sm font-semibold text-gray-800 group-hover:text-green-700 transition-colors"
-                        >
-                          {city.name}
-                        </Link>
-                      </td>
-                      {serviceItems.map((item) => (
-                        <td key={item.slug} className="px-4 py-3 text-center">
-                          <Link
-                            href={`/${city.slug}/${item.slug}`}
-                            className="inline-flex items-center justify-center text-xs text-green-700 border border-green-300 bg-green-50 px-3 py-1 hover:bg-green-700 hover:text-white hover:border-green-700 transition-colors"
-                          >
-                            詳細
-                          </Link>
-                        </td>
-                      ))}
-                    </tr>
+            {/* 滋賀県 */}
+            <div className="mt-12">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="bg-gray-600 px-4 py-1.5 flex items-center gap-2">
+                  <svg aria-hidden="true" focusable="false" className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  </svg>
+                  <span className="text-white font-bold text-sm">滋賀県</span>
+                </div>
+                <span className="text-gray-400 text-xs">一部エリア対応（要相談）</span>
+              </div>
+              <div className="bg-gray-50 border border-gray-200 px-5 py-4">
+                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">対応エリア（滋賀県）</p>
+                <div className="flex flex-wrap gap-x-6 gap-y-1.5">
+                  {["大津市", "草津市", "守山市", "栗東市", "野洲市", "その他滋賀県内（要相談）"].map((area) => (
+                    <span key={area} className="flex items-center gap-1.5 text-sm text-gray-600">
+                      <span className="w-1 h-1 bg-gray-400 shrink-0" />
+                      {area}
+                    </span>
                   ))}
-                </tbody>
-              </table>
+                </div>
+              </div>
             </div>
           </div>
 

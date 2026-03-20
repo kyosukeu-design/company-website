@@ -114,7 +114,7 @@ export default function FaqPage() {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
               <div>
                 <h3 className="font-bold text-gray-900 text-base mb-1">解決しない場合はお気軽にご相談ください</h3>
-                <p className="text-gray-500 text-sm">お見積り・ご相談は無料です。担当者が丁寧にご案内します。</p>
+                <p className="text-gray-500 text-sm">担当者が丁寧にご案内します。</p>
               </div>
               <Link href="/contact" className="btn-primary shrink-0 text-sm px-6 py-2.5">
                 WEBでお問い合わせ

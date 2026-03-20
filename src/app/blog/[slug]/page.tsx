@@ -221,10 +221,10 @@ export default async function BlogPostPage({ params }: Props) {
               <div className="bg-gray-900 p-6 border-t-4 border-green-700">
                 <p className="text-white font-bold text-sm mb-2">お気軽にご相談ください</p>
                 <p className="text-gray-400 text-xs leading-relaxed mb-5">
-                  見積り・ご相談は無料です。担当者が丁寧にご案内します。
+                  担当者が丁寧にご案内します。
                 </p>
                 <Link href="/contact" className="block text-center bg-green-700 text-white text-sm font-bold py-3 hover:bg-green-800 transition-colors">
-                  無料でお問い合わせ
+                  お問い合わせ
                 </Link>
               </div>
 
@@ -279,10 +279,10 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             <div>
               <h2 className="font-bold text-gray-900 text-lg mb-1">ご不明な点はお気軽にご相談ください</h2>
-              <p className="text-gray-500 text-sm">見積り・ご相談は無料。担当者が丁寧にご案内します。</p>
+              <p className="text-gray-500 text-sm">担当者が丁寧にご案内します。</p>
             </div>
             <Link href="/contact" className="btn-primary shrink-0">
-              無料でお問い合わせ
+              お問い合わせ
             </Link>
           </div>
         </div>

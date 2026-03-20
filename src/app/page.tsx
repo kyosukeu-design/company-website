@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import HeroSlideshow from "@/components/HeroSlideshow";
 
 const BASE_URL = "https://kyoei-shigyo.jp";
 
 export const metadata: Metadata = {
-  title: "共栄紙業株式会社 | 兵庫・大阪の古紙・資源リサイクル専門",
+  title: "共栄紙業株式会社 | 関西の古紙・資源リサイクル専門",
   description:
-    "共栄紙業株式会社は兵庫・大阪を中心に古紙回収・機密書類処理・金属スクラップ回収・産業廃棄物収集運搬を行う専門企業です。法人向け定期回収・スポット対応・有価買取に対応。まずは無料でお見積りください。",
+    "共栄紙業株式会社は関西を中心に古紙回収・機密書類処理・金属スクラップ回収・産業廃棄物収集運搬を行う専門企業です。廃棄物管理コンサルティングは全国対応。法人向け定期回収・スポット対応・有価買取に対応。まずはお見積りください。",
   alternates: { canonical: BASE_URL },
   openGraph: {
-    title: "共栄紙業株式会社 | 兵庫・大阪の古紙・資源リサイクル専門",
+    title: "共栄紙業株式会社 | 関西の古紙・資源リサイクル専門",
     description:
-      "兵庫・大阪を中心に古紙回収・機密書類処理・金属スクラップ回収・産業廃棄物収集運搬を行う専門企業。法人向け定期回収・スポット対応・有価買取に対応。",
+      "関西を中心に古紙回収・機密書類処理・金属スクラップ回収・産業廃棄物収集運搬を行う専門企業。廃棄物管理は全国対応。法人向け定期回収・スポット対応・有価買取に対応。",
     url: BASE_URL,
     locale: "ja_JP",
     type: "website",
@@ -36,8 +37,8 @@ const features = [
   },
   {
     num: "04",
-    title: "兵庫・大阪 広域対応",
-    desc: "兵庫県・大阪府の主要エリアを網羅。自社トラック50台以上の安定した回収体制を備えています。",
+    title: "広域対応",
+    desc: "兵庫・大阪を中心に京都・奈良・滋賀・和歌山まで関西全域をカバー。廃棄物管理コンサルティングは全国対応しています。",
   },
 ];
 
@@ -47,21 +48,55 @@ const serviceItems = [
   { label: "機密文書処理", sub: "廃棄証明書発行対応" },
   { label: "金属スクラップ", sub: "工場・製造業向け" },
   { label: "プラスチック類", sub: "梱包材・パレット等" },
-  { label: "スポット回収", sub: "移転・倉庫整理等" },
-  { label: "廃棄物管理", sub: "業者選定・法令対応・コスト最適化" },
-  { label: "BPO", sub: "請求書・データ登録・バックオフィス全般" },
+  { label: "発泡スチロール", sub: "梱包材・食品トレー等" },
+  { label: "飲料容器", sub: "缶・ペットボトル・ビン等" },
+  { label: "木くず", sub: "パレット・梱包材・端材等" },
 ];
 
+
 const stats = [
-  { value: "創業40年", unit: "", label: "の実績と信頼" },
-  { value: "1,200", unit: "社以上", label: "の取引実績" },
-  { value: "3,000", unit: "t/月以上", label: "の回収・処理量" },
-  { value: "翌日", unit: "対応", label: "最短スポット回収" },
+  { value: "70年", label: "の業歴", desc: "1955年創業。長年の信頼と実績" },
+  { value: "1,200社+", label: "累計取引社数", desc: "関西を中心に幅広い業種" },
+  { value: "月3,000t+", label: "の回収量", desc: "安定した処理能力と体制" },
+  { value: "50台+", label: "トラック保有台数", desc: "迅速・安定した回収体制を支える自社車両" },
+];
+
+const industries = [
+  {
+    name: "製造業",
+    icon: "🏭",
+    cases: ["製造工程で生じる段ボール・梱包材の定期回収", "金属スクラップ・切削くずの回収・買取", "工場移転に伴う大量廃棄のスポット対応"],
+  },
+  {
+    name: "物流・倉庫業",
+    icon: "🚛",
+    cases: ["倉庫から発生する大量段ボールの定期回収", "梱包材・パレットのリサイクル対応", "複数拠点の一括管理・回収"],
+  },
+  {
+    name: "小売・スーパー",
+    icon: "🛒",
+    cases: ["店舗から毎日発生する段ボールの毎日回収", "食品トレー・プラスチック類の分別回収", "チェーン全店舗の統一管理"],
+  },
+  {
+    name: "オフィス・企業",
+    icon: "🏢",
+    cases: ["コピー用紙・書類の定期回収", "機密文書・個人情報書類の安全処理", "オフィス移転時の一括廃棄対応"],
+  },
+  {
+    name: "病院・医療機関",
+    icon: "🏥",
+    cases: ["患者記録・医療書類の機密廃棄", "段ボール・梱包材の定期回収", "処理証明書の定期発行"],
+  },
+  {
+    name: "学校・教育機関",
+    icon: "🏫",
+    cases: ["古紙・教材の定期回収", "図書・書籍の処分対応", "年度末の大量廃棄スポット対応"],
+  },
 ];
 
 const flowSteps = [
   { step: "STEP 01", title: "お問い合わせ", desc: "WEB・お電話にてご連絡ください。品目・量・エリアをお知らせいただくとスムーズです。" },
-  { step: "STEP 02", title: "現地確認・見積", desc: "担当者が無料でご訪問。回収場所・品目を確認し、お見積りをご提示します。" },
+  { step: "STEP 02", title: "現地確認・見積", desc: "担当者がご訪問。回収場所・品目を確認し、お見積りをご提示します。" },
   { step: "STEP 03", title: "ご契約・日程調整", desc: "内容にご納得いただけましたら契約書を締結。回収スケジュールを決定します。" },
   { step: "STEP 04", title: "回収開始", desc: "定期またはスポットで回収を開始。回収後は計量票・処理証明書を発行します。" },
 ];
@@ -72,16 +107,16 @@ const localBusinessSchema = {
   name: "共栄紙業株式会社",
   url: BASE_URL,
   description:
-    "兵庫・大阪を中心に古紙回収・機密書類処理・金属スクラップ回収・産業廃棄物収集運搬を行う専門企業。",
+    "関西を中心に古紙回収・機密書類処理・金属スクラップ回収・産業廃棄物収集運搬を行う専門企業。廃棄物管理コンサルティングは全国対応。",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "潮江1丁目",
+    streetAddress: "南武庫之荘10丁目7番9号",
     addressLocality: "尼崎市",
     addressRegion: "兵庫県",
-    postalCode: "660-0805",
+    postalCode: "661-0033",
     addressCountry: "JP",
   },
-  telephone: "078-XXX-XXXX",
+  telephone: "06-6437-0180",
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
@@ -116,82 +151,111 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }} />
 
       {/* ── HERO ─────────────────────────────────────── */}
-      <section className="pt-[100px] lg:pt-[112px]">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] xl:grid-cols-[1fr_440px] min-h-[520px]">
-          {/* Left: キャッチコピー */}
-          <div className="bg-white flex items-center px-6 sm:px-10 lg:px-16 py-14 lg:py-20">
-            <div className="max-w-xl">
-              <p className="text-xs font-semibold tracking-[0.2em] text-green-700 mb-4 uppercase">
-                古紙・資源リサイクル ／ 兵庫・大阪
-              </p>
+      <section className="relative overflow-hidden pt-[100px] lg:pt-[112px] min-h-[600px] flex items-center">
 
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-[1.5] mb-6">
-                <span className="border-l-4 border-green-700 pl-4 block">
-                  企業の資源管理を、<br />
-                  責任と実績で支える。
+        {/* 写真スライドショー（背景） */}
+        <HeroSlideshow />
+
+        {/* テキストコンテンツ */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-14 lg:py-20">
+          {/* 半透明パネル */}
+          <div className="max-w-xl bg-black/30 backdrop-blur-sm px-8 py-10 rounded-sm">
+            <p className="text-xs font-semibold tracking-[0.2em] text-green-300 mb-4 uppercase"
+               style={{ textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}>
+              未来の環境を創造する
+            </p>
+
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.25] mb-4"
+                style={{ textShadow: "0 2px 8px rgba(0,0,0,0.6)" }}>
+              <span className="border-l-[6px] border-green-400 pl-5 block">
+                すばらしき人生は<br />
+                よりよい環境から
+              </span>
+            </h1>
+            <p className="font-accent text-green-300 text-base lg:text-lg font-semibold tracking-widest mb-6 pl-6"
+               style={{ textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}>
+              Better Environments, Better Life
+            </p>
+
+            <p className="text-white/90 text-sm lg:text-base leading-relaxed mb-8"
+               style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>
+              私たちは限りある資源のリサイクルを通じて、<br />
+              循環型社会の実現と美しい地球環境の保全に貢献します。
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3 mb-8">
+              <Link href="/contact" className="btn-primary text-sm px-6 py-3">
+                <svg aria-hidden="true" focusable="false" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                お問い合わせ・お見積り
+              </Link>
+              <Link href="/flow" className="btn-outline text-sm px-6 py-3 !text-white !border-white hover:!bg-white hover:!text-green-800">
+                回収の流れを見る
+                <svg aria-hidden="true" focusable="false" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {["最短翌日対応", "定期回収対応", "処理証明書発行", "機密書類対応", "有価買取"].map((tag) => (
+                <span key={tag} className="text-xs bg-white/15 text-white border border-white/40 px-3 py-1 font-medium">
+                  ✓ {tag}
                 </span>
-              </h1>
-
-              <p className="text-gray-600 text-sm lg:text-base leading-relaxed mb-8">
-                共栄紙業株式会社は創業40年、兵庫・大阪の企業様の古紙・資源リサイクルを一貫してサポートしてまいりました。
-                段ボール・古紙・機密書類・金属スクラップなど、幅広い品目を確実に回収・処理します。
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-3 mb-8">
-                <Link href="/contact" className="btn-primary text-sm px-6 py-3">
-                  <svg aria-hidden="true" focusable="false" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  無料でお問い合わせ・お見積り
-                </Link>
-                <Link href="/flow" className="btn-outline text-sm px-6 py-3">
-                  回収の流れを見る
-                  <svg aria-hidden="true" focusable="false" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {["最短翌日対応", "定期回収対応", "処理証明書発行", "機密書類対応", "有価買取"].map((tag) => (
-                  <span key={tag} className="text-xs bg-green-50 text-green-800 border border-green-200 px-3 py-1 font-medium">
-                    ✓ {tag}
-                  </span>
-                ))}
-              </div>
+              ))}
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Right: 実績パネル */}
-          <div className="bg-green-800 text-white flex flex-col justify-between px-8 py-10 lg:py-14">
+      {/* ── Our Mission ─────────────────────────────── */}
+      <section className="relative py-16 lg:py-24 overflow-hidden border-t border-gray-200">
+        {/* 薄緑の斜めカット背景 */}
+        <div className="absolute inset-0 bg-white" />
+        <div
+          className="absolute inset-0 bg-green-50"
+          style={{ clipPath: "polygon(0 0, 62% 0, 48% 100%, 0 100%)" }}
+        />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
             <div>
-              <p className="font-accent text-green-300 text-xs tracking-widest mb-4 font-medium uppercase">Company Data</p>
-              <div className="space-y-0 divide-y divide-green-700">
-                {stats.map((s) => (
-                  <div key={s.label} className="py-4 flex items-baseline justify-between gap-2">
-                    <div className="text-green-200 text-xs leading-snug">{s.label}</div>
-                    <div className="text-right shrink-0">
-                      <span className="font-accent text-2xl font-bold text-white">{s.value}</span>
-                      <span className="font-accent text-green-300 text-xs ml-1">{s.unit}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <span className="sec-label">Our Mission</span>
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-snug mt-2 mb-6">
+                より良い環境を後世へ。<br />
+                豊かな社会創りに貢献します。
+              </h2>
+              <p className="text-gray-600 text-sm lg:text-base leading-relaxed">
+                共栄紙業は、古紙回収・リサイクル事業を通じて、<br />資源の有効活用を推進しています。<br />
+                使い終わった紙やプラスチックを「ゴミ」ではなく「資源」として捉え、<br className="hidden lg:block" />
+                新たな価値を生み出す循環の輪を作り出します。
+              </p>
             </div>
-
-            <div className="mt-8 border border-green-600 p-5">
-              <p className="text-green-300 text-xs mb-2">お電話でのお問い合わせ</p>
-              <p className="font-accent text-2xl font-bold text-white tracking-wide">078-xxx-xxxx</p>
-              <p className="text-green-300 text-xs mt-1">受付：平日 8:00〜17:00</p>
-              <p className="font-accent text-green-400 text-xs mt-3">WEB 24H受付</p>
+            <div className="mt-10 lg:mt-0 grid grid-cols-3 gap-px bg-gray-200">
+              {[
+                { num: "1955", label: "年創業", desc: "70年以上の歴史と信頼" },
+                { num: "関西", label: "全域対応", desc: "兵庫・大阪を中心に関西広域エリアをカバー" },
+                { num: "資源", label: "循環への貢献", desc: "廃棄物を価値ある資源に、\n循環を生み出す。" },
+              ].map((item) => (
+                <div key={item.label} className="bg-gray-50 p-5 text-center">
+                  <p className="font-accent text-green-700 font-bold text-xl mb-1">{item.num}</p>
+                  <p className="font-semibold text-gray-900 text-xs mb-2">{item.label}</p>
+                  <p className="text-gray-500 text-xs leading-relaxed whitespace-pre-line">{item.desc}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* ── 選ばれる理由 ────────────────────────────── */}
-      <section className="py-16 lg:py-24 bg-gray-50 border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-16 lg:py-24 overflow-hidden border-t border-gray-200">
+        <div className="absolute inset-0 bg-gray-50" />
+        <div
+          className="absolute inset-0 bg-green-50"
+          style={{ clipPath: "polygon(50% 0, 100% 0, 100% 100%, 36% 100%)" }}
+        />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-10">
             <span className="sec-label">Why Choose Us</span>
             <h2 className="sec-title">共栄紙業が選ばれる4つの理由</h2>
@@ -206,12 +270,32 @@ export default function Home() {
               </div>
             ))}
           </div>
+
+          {/* 実績数字 */}
+          <div className="mt-10 mb-3">
+            <span className="sec-label">Results</span>
+            <h3 className="sec-title">これまでの実績</h3>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-gray-200">
+            {stats.map((s) => (
+              <div key={s.label} className="bg-green-700 px-6 py-5 text-center">
+                <div className="font-accent text-2xl lg:text-3xl font-bold text-white mb-0.5">{s.value}</div>
+                <div className="font-semibold text-green-100 text-xs mb-1">{s.label}</div>
+                <div className="text-green-300 text-xs">{s.desc}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ── サービス概要 ────────────────────────────── */}
-      <section className="py-16 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-16 lg:py-24 overflow-hidden border-t border-gray-200">
+        <div className="absolute inset-0 bg-white" />
+        <div
+          className="absolute inset-0 bg-green-50"
+          style={{ clipPath: "polygon(0 0, 62% 0, 48% 100%, 0 100%)" }}
+        />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-[280px_1fr] lg:gap-16 items-start">
             <div className="mb-10 lg:mb-0">
               <span className="sec-label">Services</span>
@@ -242,8 +326,38 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── 対応業種・事例 ──────────────────────────── */}
+      <section className="py-16 lg:py-24 bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <span className="text-xs font-bold tracking-widest text-green-400 uppercase font-accent">Industries</span>
+            <h2 className="text-2xl lg:text-3xl font-bold text-white mt-1">対応業種・事例</h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-gray-700">
+            {industries.map((ind) => (
+              <div key={ind.name} className="bg-gray-800 p-6 border-t-4 border-green-600">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-3xl">{ind.icon}</span>
+                  <h3 className="font-bold text-white">{ind.name}</h3>
+                </div>
+                <ul className="space-y-2">
+                  {ind.cases.map((c) => (
+                    <li key={c} className="flex items-start gap-2 text-sm text-gray-300">
+                      <svg aria-hidden="true" focusable="false" className="w-4 h-4 text-green-500 shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      {c}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── 回収の流れ ──────────────────────────────── */}
-      <section className="py-16 lg:py-24 bg-gray-50 border-t border-gray-200">
+      <section className="py-16 lg:py-24 bg-white border-t-4 border-green-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-10">
             <span className="sec-label">Flow</span>
@@ -265,33 +379,25 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="mt-6 text-right">
-            <Link href="/flow" className="inline-flex items-center gap-1.5 text-green-700 text-sm font-semibold hover:text-green-900 transition-colors">
-              回収の流れ詳細を見る
-              <svg aria-hidden="true" focusable="false" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </div>
         </div>
       </section>
 
       {/* ── 対応エリア帯 ────────────────────────────── */}
-      <section className="bg-white border-t border-b border-gray-200">
+      <section className="bg-gray-900 border-t border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-10">
             <div className="flex items-center gap-3 shrink-0">
-              <svg aria-hidden="true" focusable="false" className="w-5 h-5 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg aria-hidden="true" focusable="false" className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              <span className="font-bold text-gray-900 text-sm">主な対応エリア</span>
+              <span className="font-bold text-white text-sm">主な対応エリア</span>
             </div>
             <div className="flex flex-wrap gap-2">
-              {["神戸市", "尼崎市", "西宮市", "芦屋市", "姫路市", "明石市", "加古川市", "大阪市", "堺市", "東大阪市", "豊中市", "吹田市"].map((area) => (
-                <span key={area} className="bg-gray-100 text-gray-700 text-xs px-3 py-1 font-medium">{area}</span>
+              {["神戸市", "尼崎市", "西宮市", "芦屋市", "姫路市", "明石市", "高砂市", "加古川市", "大阪市", "堺市", "東大阪市", "豊中市", "吹田市", "京都市", "奈良市", "大津市"].map((area) => (
+                <span key={area} className="bg-gray-800 text-gray-300 text-xs px-3 py-1 font-medium">{area}</span>
               ))}
-              <Link href="/area" className="text-green-700 text-xs font-semibold px-2 py-1 hover:underline">
+              <Link href="/area" className="text-green-400 text-xs font-semibold px-2 py-1 hover:underline">
                 エリア詳細 →
               </Link>
             </div>
@@ -332,7 +438,7 @@ export default function Home() {
               </h2>
               <p className="text-green-200 text-sm leading-relaxed">
                 回収品目・量・頻度・エリアに合わせて最適なプランをご提案します。<br />
-                無料現地確認・お見積りを承っております。
+                現地確認・お見積りを承っております。
               </p>
             </div>
             <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
@@ -340,11 +446,11 @@ export default function Home() {
                 href="/contact"
                 className="bg-white text-green-800 font-bold text-sm px-8 py-4 text-center hover:bg-green-50 transition-colors"
               >
-                WEBでお問い合わせ（無料）
+                WEBでお問い合わせ
               </Link>
               <div className="bg-green-700 px-6 py-4 text-center">
                 <p className="text-green-300 text-xs mb-1">お電話</p>
-                <p className="text-white font-bold text-lg tracking-wide">078-xxx-xxxx</p>
+                <p className="text-white font-bold text-lg tracking-wide">06-6437-0180</p>
                 <p className="text-green-300 text-xs mt-0.5">平日 8:00〜17:00</p>
               </div>
             </div>

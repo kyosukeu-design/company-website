@@ -28,7 +28,7 @@ const kyoeiFactories = [
     area: "1,440㎡",
     equipment: "大型自動古紙梱包機1台、トラックスケール1台、各種リフト3台",
     services: ["古紙回収・梱包", "産業廃棄物収集運搬業"],
-    image: "",
+    image: "/honsha.jpg",
   },
   {
     num: "02",
@@ -40,7 +40,7 @@ const kyoeiFactories = [
     area: "1,545㎡",
     equipment: "大型自動古紙梱包機1台、トラックスケール1台、大型一軸破砕機1台、各種リフト3台",
     services: ["古紙回収・梱包", "機密処理・破砕施設"],
-    image: "",
+    image: "/shioe.jpg",
   },
   {
     num: "03",
@@ -52,7 +52,7 @@ const kyoeiFactories = [
     area: "3,300㎡",
     equipment: "大型自動古紙梱包機1台、トラックスケール1台、大型溶融・減容機1台、各種リフト5台",
     services: ["古紙回収・梱包・輸出ヤード", "発泡スチロール溶融減容"],
-    image: "",
+    image: "/nishinomiyahama.jpg",
   },
   {
     num: "04",
@@ -64,7 +64,7 @@ const kyoeiFactories = [
     area: "943㎡",
     equipment: "大型選別・圧縮・梱包機1台、リフト2台",
     services: ["飲料容器（缶・瓶・ペットボトル）選別", "産業廃棄物処理"],
-    image: "",
+    image: "/nishinomiyahama2.jpg",
   },
 ];
 
@@ -168,6 +168,39 @@ function FactoryCard({ f }: { f: Factory }) {
         </div>
       </div>
 
+      {/* 写真 + Google Map */}
+      {f.image !== undefined && (
+        <div className="flex gap-3 h-64 px-4 py-4">
+          {/* 左：写真 */}
+          <div className="w-1/2 bg-gray-100 overflow-hidden shrink-0 border border-gray-200">
+            {f.image ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={f.image} alt={f.name} className="w-full h-full object-contain object-left" />
+            ) : (
+              <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-gray-300">
+                <svg aria-hidden="true" focusable="false" className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span className="text-xs font-accent tracking-widest">PHOTO</span>
+              </div>
+            )}
+          </div>
+          {/* 右：Google Map */}
+          <div className="w-1/2 shrink-0 border border-gray-200 overflow-hidden">
+            <iframe
+              src={`https://maps.google.com/maps?q=${encodeURIComponent(f.address)}&output=embed&z=17&iwloc=near`}
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title={`${f.name}の地図`}
+            />
+          </div>
+        </div>
+      )}
+
       {/* 詳細 */}
       <div className="p-6 space-y-4">
         {/* 所在地 */}
@@ -187,25 +220,14 @@ function FactoryCard({ f }: { f: Factory }) {
           </a>
         </div>
 
-        {/* TEL / FAX */}
-        <div className="grid grid-cols-2 gap-3">
-          <div className="flex items-center gap-2">
-            <svg aria-hidden="true" focusable="false" className="w-4 h-4 text-green-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-            </svg>
-            <div>
-              <span className="text-gray-400 text-xs block">TEL</span>
-              <span className="font-accent text-sm font-semibold text-gray-800">{f.tel}</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <svg aria-hidden="true" focusable="false" className="w-4 h-4 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-            </svg>
-            <div>
-              <span className="text-gray-400 text-xs block">FAX</span>
-              <span className="font-accent text-sm text-gray-600">{f.fax}</span>
-            </div>
+        {/* TEL */}
+        <div className="flex items-center gap-2">
+          <svg aria-hidden="true" focusable="false" className="w-4 h-4 text-green-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          <div>
+            <span className="text-gray-400 text-xs block">TEL</span>
+            <span className="font-accent text-sm font-semibold text-gray-800">{f.tel}</span>
           </div>
         </div>
 
@@ -237,23 +259,6 @@ function FactoryCard({ f }: { f: Factory }) {
           </div>
         </div>
       </div>
-
-      {/* 写真 */}
-      {f.image !== undefined && (
-        <div className="w-full h-52 bg-gray-100 overflow-hidden">
-          {f.image ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={f.image} alt={f.name} className="w-full h-full object-cover" />
-          ) : (
-            <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-gray-400">
-              <svg aria-hidden="true" focusable="false" className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <span className="text-xs font-accent tracking-widest">PHOTO</span>
-            </div>
-          )}
-        </div>
-      )}
     </div>
   );
 }
@@ -263,28 +268,12 @@ export default function FactoryPage() {
     <>
       <PageHero
         title="工場紹介"
-        subtitle="共栄紙業グループは兵庫・大阪に9拠点を展開し、安全・確実な資源リサイクルを実現しています。"
+        subtitle="共栄紙業グループは関西に複数拠点を展開し、安全・確実な資源リサイクルを実現しています。"
         breadcrumb="工場紹介"
       />
 
       <section className="py-14 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-          {/* 概要数値 */}
-          <div className="grid grid-cols-3 gap-px bg-gray-200 mb-14">
-            {[
-              { value: "9", unit: "拠点", label: "グループ合計" },
-              { value: "11,340", unit: "㎡以上", label: "グループ総敷地面積" },
-              { value: "50台+", unit: "", label: "保有車両" },
-            ].map((s) => (
-              <div key={s.label} className="bg-white py-6 text-center border-t-4 border-green-700">
-                <div className="font-accent text-2xl lg:text-3xl font-bold text-green-700">
-                  {s.value}<span className="text-base font-normal text-gray-500 ml-1">{s.unit}</span>
-                </div>
-                <div className="text-gray-500 text-xs mt-1">{s.label}</div>
-              </div>
-            ))}
-          </div>
 
           {/* 共栄紙業 直営工場 */}
           <div className="mb-10">

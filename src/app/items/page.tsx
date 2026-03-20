@@ -5,11 +5,11 @@ import PageHero from "@/components/PageHero";
 const BASE_URL = "https://kyoei-shigyo.jp";
 
 export const metadata: Metadata = {
-  title: "回収できるもの",
+  title: "回収品目",
   description: "共栄紙業が回収できる品目一覧。専ら物・有価物・産業廃棄物の3カテゴリで幅広く対応しています。",
   alternates: { canonical: `${BASE_URL}/items` },
   openGraph: {
-    title: "回収できるもの | 共栄紙業株式会社",
+    title: "回収品目 | 共栄紙業株式会社",
     description: "段ボール・古紙・金属スクラップ・機密書類・産業廃棄物など、回収できる品目を専ら物・有価物・産業廃棄物の3カテゴリで解説します。",
     url: `${BASE_URL}/items`,
     locale: "ja_JP",
@@ -82,9 +82,9 @@ export default function ItemsPage() {
   return (
     <>
       <PageHero
-        title="回収できるもの"
+        title="回収品目"
         subtitle="専ら物・有価物・産業廃棄物の3カテゴリで幅広く対応しています。"
-        breadcrumb="回収できるもの"
+        breadcrumb="回収品目"
       />
 
       <section className="py-14 lg:py-20 bg-white">
@@ -107,7 +107,7 @@ export default function ItemsPage() {
           {/* 各カテゴリ */}
           <div className="space-y-12">
             {categories.map((cat) => (
-              <div key={cat.id} id={cat.id} className={`border-t-4 ${cat.accentColor}`}>
+              <div key={cat.id} id={cat.id} className={`border-t-4 scroll-mt-32 ${cat.accentColor}`}>
                 {/* ヘッダー */}
                 <div className={`${cat.headerBg} px-6 py-4 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4`}>
                   <div>
@@ -163,7 +163,7 @@ export default function ItemsPage() {
               <p className="text-gray-500 text-sm">品目・量・頻度など、まずはお気軽にご相談ください。</p>
             </div>
             <Link href="/contact" className="btn-primary shrink-0">
-              無料でお問い合わせ
+              お問い合わせ
             </Link>
           </div>
         </div>

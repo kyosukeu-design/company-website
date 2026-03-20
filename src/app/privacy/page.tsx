@@ -94,8 +94,8 @@ export default function PrivacyPage() {
                 {section.contact && (
                   <div className="mt-4 p-5 bg-gray-50 border border-gray-200">
                     <p className="text-sm text-gray-700 mb-1"><span className="font-semibold">会社名：</span>共栄紙業株式会社</p>
-                    <p className="text-sm text-gray-700 mb-1"><span className="font-semibold">所在地：</span>〒660-0805 兵庫県尼崎市潮江1丁目</p>
-                    <p className="text-sm text-gray-700 mb-1"><span className="font-semibold">電話：</span>078-XXX-XXXX（平日 9:00〜17:00）</p>
+                    <p className="text-sm text-gray-700 mb-1"><span className="font-semibold">所在地：</span>〒661-0033 兵庫県尼崎市南武庫之荘10丁目7番9号</p>
+                    <p className="text-sm text-gray-700 mb-1"><span className="font-semibold">電話：</span>06-6437-0180（平日 8:00〜17:00）</p>
                     <p className="text-sm text-gray-700">
                       <span className="font-semibold">フォーム：</span>
                       <Link href="/contact" className="text-green-700 hover:underline">

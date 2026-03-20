@@ -1,11 +1,37 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #166534;
-  --color-brand-dark: #14532d;
-  --color-brand-mid: #15803d;
-  --color-brand-light: #dcfce7;
-  --font-sans: var(--font-noto), "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  /* ── Green scale: ロゴの鮮やかなグリーンに合わせて再定義 ── */
+  --color-green-50:  #f0fdf6;
+  --color-green-100: #dcfce9;
+  --color-green-200: #bbf7d0;
+  --color-green-300: #86efac;
+  --color-green-400: #4ade80;
+  --color-green-500: #32d265;
+  --color-green-600: #28b854;
+  --color-green-700: #1fa048;
+  --color-green-800: #177535;
+  --color-green-900: #0f5523;
+
+  /* ── Blue scale: ロゴの青サークルから ── */
+  --color-blue-50:  #eef0fc;
+  --color-blue-100: #dce1f9;
+  --color-blue-200: #b9c3f3;
+  --color-blue-300: #8e9ee9;
+  --color-blue-400: #6473dc;
+  --color-blue-500: #4b5cc4;
+  --color-blue-600: #3b4aaa;
+  --color-blue-700: #2f3b8e;
+  --color-blue-800: #243074;
+  --color-blue-900: #1a255c;
+
+  /* ── Brand tokens ── */
+  --color-brand:       #1fa048;
+  --color-brand-dark:  #177535;
+  --color-brand-mid:   #28b854;
+  --color-brand-light: #dcfce9;
+
+  --font-sans:   var(--font-noto), "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
   --font-accent: var(--font-montserrat), sans-serif;
 }
 
@@ -32,7 +58,7 @@ body {
   font-family: var(--font-accent);
   font-size: 0.7rem;
   letter-spacing: 0.18em;
-  color: #166534;
+  color: var(--color-brand);
   font-weight: 600;
   margin-bottom: 0.4rem;
   text-transform: uppercase;
@@ -44,7 +70,7 @@ body {
   color: #111827;
   line-height: 1.4;
   padding-bottom: 0.75rem;
-  border-bottom: 2px solid #166534;
+  border-bottom: 2px solid var(--color-brand);
   display: inline-block;
 }
 
@@ -64,7 +90,7 @@ body {
   display: block;
   width: 4px;
   min-height: 100%;
-  background: #166534;
+  background: var(--color-brand);
   border-radius: 2px;
   flex-shrink: 0;
   align-self: stretch;
@@ -77,18 +103,18 @@ body {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.75rem 2rem;
-  background: #166534;
+  background: var(--color-brand);
   color: #fff;
   font-weight: 700;
   font-size: 0.9rem;
-  border: 2px solid #166534;
+  border: 2px solid var(--color-brand);
   transition: background 0.2s, color 0.2s;
   cursor: pointer;
 }
 
 .btn-primary:hover {
-  background: #14532d;
-  border-color: #14532d;
+  background: var(--color-brand-dark);
+  border-color: var(--color-brand-dark);
 }
 
 .btn-outline {
@@ -98,23 +124,79 @@ body {
   gap: 0.5rem;
   padding: 0.75rem 2rem;
   background: transparent;
-  color: #166534;
+  color: var(--color-brand);
   font-weight: 700;
   font-size: 0.9rem;
-  border: 2px solid #166534;
+  border: 2px solid var(--color-brand);
   transition: background 0.2s, color 0.2s;
   cursor: pointer;
 }
 
 .btn-outline:hover {
-  background: #166534;
+  background: var(--color-brand);
   color: #fff;
+}
+
+/* ── Globe / Eco animation ───────────────── */
+@keyframes orbit-cw {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes orbit-ccw {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+@keyframes grow-tree {
+  0%   { transform: scaleY(0);    opacity: 0; }
+  8%   { opacity: 1; }
+  38%  { transform: scaleY(1); }
+  65%  { transform: scaleY(1);    opacity: 1; }
+  82%  { opacity: 0; }
+  100% { transform: scaleY(0);    opacity: 0; }
+}
+@keyframes leaf-drift {
+  0%   { transform: translate(0, 0)       rotate(0deg);  opacity: 0; }
+  12%  { opacity: 0.85; }
+  100% { transform: translate(28px,-115px) rotate(32deg); opacity: 0; }
+}
+@keyframes leaf-drift-l {
+  0%   { transform: translate(0, 0)        rotate(0deg);  opacity: 0; }
+  12%  { opacity: 0.85; }
+  100% { transform: translate(-28px,-110px) rotate(-28deg); opacity: 0; }
+}
+@keyframes sun-pulse {
+  0%, 100% { opacity: 0.88; }
+  50%       { opacity: 1;    }
+}
+@keyframes leaf-float {
+  0%, 100% { transform: translateY(0px)   rotate(var(--lf-r, 0deg)); }
+  50%       { transform: translateY(-10px) rotate(var(--lf-r, 0deg)); }
+}
+@keyframes leaf-sway {
+  0%, 100% { transform: rotate(var(--lf-r, 0deg)); }
+  50%       { transform: rotate(calc(var(--lf-r, 0deg) + 6deg)); }
+}
+/* ── Hero: Resource Circular Flow background ── */
+@keyframes eco-ring-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes eco-particle-float {
+  0%,  100% { transform: translate(0,      0);     }
+  33%        { transform: translate(5px,  -14px);  }
+  66%        { transform: translate(-5px,   7px);  }
+}
+
+@keyframes ring-expand {
+  0%   { transform: scale(1);   opacity: 0.75; }
+  60%  { opacity: 0.4; }
+  100% { transform: scale(4.8); opacity: 0;    }
 }
 
 /* ── カード ──────────────────────────────── */
 .corp-card {
   background: #fff;
   border: 1px solid #e5e7eb;
-  border-top: 3px solid #166534;
+  border-top: 3px solid var(--color-brand);
   padding: 1.5rem;
 }

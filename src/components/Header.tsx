@@ -1,42 +1,69 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-const navItems = [
-  { href: "/service", label: "サービス" },
-  { href: "/items", label: "回収できるもの" },
+type NavItem =
+  | { href: string; label: string; children?: never }
+  | { href?: never; label: string; children: { href: string; label: string }[] };
+
+const navItems: NavItem[] = [
+  {
+    label: "サービス一覧",
+    children: [
+      { href: "/service", label: "リサイクル・処分" },
+      { href: "/service/waste-management", label: "廃棄物管理" },
+      { href: "/service/bpo", label: "BPO（事務作業代行）" },
+      { href: "/faq", label: "FAQ" },
+    ],
+  },
   { href: "/area", label: "回収エリア" },
-  { href: "/results", label: "実績" },
-  { href: "/factory", label: "工場紹介" },
-  { href: "/flow", label: "回収の流れ" },
-  { href: "/faq", label: "FAQ" },
+  { href: "/items", label: "回収品目" },
+  { href: "/pricing", label: "料金" },
+  {
+    label: "会社情報",
+    children: [
+      { href: "/company", label: "会社概要" },
+      { href: "/factory", label: "工場紹介" },
+      { href: "/recruit", label: "採用情報" },
+      { href: "/blog", label: "コラム" },
+    ],
+  },
 ];
+
+const isDropdownActive = (label: string, pathname: string) => {
+  if (label === "サービス一覧") return pathname.startsWith("/service") || pathname === "/faq";
+  if (label === "会社情報") return ["/company", "/factory", "/recruit", "/blog"].includes(pathname);
+  return false;
+};
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [mobileOpenLabel, setMobileOpenLabel] = useState<string | null>(null);
   const pathname = usePathname();
+
+  const toggleMobile = (label: string) =>
+    setMobileOpenLabel((prev) => (prev === label ? null : label));
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 shadow-sm">
       {/* ── Top bar ── */}
-      <div className="bg-green-800 text-white text-xs">
+      <div className="bg-blue-800 text-white text-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-9 flex items-center justify-between">
-          <p className="hidden sm:block text-green-200">
-            兵庫・大阪の古紙・資源リサイクル専門企業
+          <p className="hidden sm:block text-blue-200">
+            関西の総合リサイクル企業
           </p>
-          <div className="flex items-center gap-5 ml-auto">
-            <span className="flex items-center gap-1.5 text-green-100">
-              <svg aria-hidden="true" focusable="false" className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-              <span className="font-accent font-semibold text-white tracking-wide">078-xxx-xxxx</span>
-              <span className="text-green-300 hidden sm:inline">（平日 8:00〜17:00）</span>
-            </span>
+          <div className="flex items-center gap-3 ml-auto">
+            <span className="text-blue-200 text-xs hidden sm:inline">お気軽にご相談ください</span>
             <Link
               href="/contact"
-              className="bg-white text-green-800 font-bold px-3 py-1 text-xs hover:bg-green-50 transition-colors"
+              className="bg-white text-blue-800 font-bold px-4 py-1 text-xs hover:bg-blue-50 transition-colors flex items-center gap-1.5"
             >
+              <svg aria-hidden="true" focusable="false" className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
               お問い合わせ
             </Link>
           </div>
@@ -48,33 +75,71 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-[68px]">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 shrink-0">
-              <div className="w-8 h-8 bg-green-700 flex items-center justify-center">
-                <svg aria-hidden="true" focusable="false" className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
-                </svg>
-              </div>
-              <div className="leading-tight">
-                <div className="text-green-800 font-bold text-base lg:text-lg tracking-tight">共栄紙業株式会社</div>
-                <div className="font-accent text-gray-500 text-xs tracking-widest">KYOEI SHIGYO CO., LTD.</div>
-              </div>
+            <Link href="/" className="flex items-center shrink-0">
+              <Image
+                src="/logo.jpg"
+                alt="共栄紙業株式会社"
+                width={180}
+                height={54}
+                className="h-10 lg:h-12 w-auto object-contain"
+                priority
+              />
             </Link>
 
             {/* Desktop Nav */}
             <nav className="hidden lg:flex items-stretch h-full">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`relative flex items-center px-3 xl:px-4 text-sm font-medium transition-colors border-b-2 -mb-px ${
-                    pathname === item.href
-                      ? "text-green-700 border-green-700"
-                      : "text-gray-700 border-transparent hover:text-green-700 hover:border-green-400"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {navItems.map((item) =>
+                item.children ? (
+                  <div
+                    key={item.label}
+                    className="relative flex items-stretch"
+                    onMouseEnter={() => setOpenDropdown(item.label)}
+                    onMouseLeave={() => setOpenDropdown(null)}
+                  >
+                    <button
+                      className={`flex items-center gap-1 px-3 xl:px-4 text-sm font-medium transition-colors border-b-2 -mb-px ${
+                        isDropdownActive(item.label, pathname)
+                          ? "text-green-700 border-green-700"
+                          : "text-gray-700 border-transparent hover:text-green-700 hover:border-green-400"
+                      }`}
+                    >
+                      {item.label}
+                      <svg aria-hidden="true" focusable="false" className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    {openDropdown === item.label && (
+                      <div className="absolute top-full left-0 w-48 bg-white border border-gray-200 shadow-lg z-50">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className={`flex items-center px-4 py-3 text-sm border-b border-gray-100 last:border-0 transition-colors ${
+                              pathname === child.href || (child.href === "/service" && pathname.startsWith("/service/") && !pathname.startsWith("/service/waste") && !pathname.startsWith("/service/bpo"))
+                                ? "text-green-700 font-semibold bg-green-50"
+                                : "text-gray-700 hover:text-green-700 hover:bg-green-50"
+                            }`}
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`relative flex items-center px-3 xl:px-4 text-sm font-medium transition-colors border-b-2 -mb-px ${
+                      pathname === item.href
+                        ? "text-green-700 border-green-700"
+                        : "text-gray-700 border-transparent hover:text-green-700 hover:border-green-400"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                )
+              )}
             </nav>
 
             {/* Mobile menu button */}
@@ -99,23 +164,73 @@ export default function Header() {
       {isOpen && (
         <div className="lg:hidden bg-white border-t border-gray-200 shadow-lg">
           <nav className="max-w-7xl mx-auto px-4">
-            {[...navItems, { href: "/contact", label: "お問い合わせ" }].map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setIsOpen(false)}
-                className={`flex items-center justify-between py-3.5 border-b border-gray-100 text-sm ${
-                  pathname === item.href
-                    ? "text-green-700 font-semibold"
-                    : "text-gray-700"
-                }`}
-              >
-                {item.label}
-                <svg aria-hidden="true" focusable="false" className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-            ))}
+            {navItems.map((item) =>
+              item.children ? (
+                <div key={item.label}>
+                  <button
+                    onClick={() => toggleMobile(item.label)}
+                    className={`w-full flex items-center justify-between py-3.5 border-b border-gray-100 text-sm ${
+                      isDropdownActive(item.label, pathname) ? "text-green-700 font-semibold" : "text-gray-700"
+                    }`}
+                  >
+                    {item.label}
+                    <svg
+                      aria-hidden="true" focusable="false"
+                      className={`w-4 h-4 text-gray-400 transition-transform ${mobileOpenLabel === item.label ? "rotate-90" : ""}`}
+                      fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                  {mobileOpenLabel === item.label && (
+                    <div className="bg-gray-50 border-b border-gray-100">
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          onClick={() => setIsOpen(false)}
+                          className={`flex items-center justify-between pl-6 pr-4 py-3 border-b border-gray-100 last:border-0 text-sm ${
+                            pathname === child.href ? "text-green-700 font-semibold" : "text-gray-600"
+                          }`}
+                        >
+                          <span className="flex items-center gap-2">
+                            <span className="w-3 h-px bg-gray-400 inline-block" />
+                            {child.label}
+                          </span>
+                          <svg aria-hidden="true" focusable="false" className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`flex items-center justify-between py-3.5 border-b border-gray-100 text-sm ${
+                    pathname === item.href ? "text-green-700 font-semibold" : "text-gray-700"
+                  }`}
+                >
+                  {item.label}
+                  <svg aria-hidden="true" focusable="false" className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              )
+            )}
+            <Link
+              href="/contact"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center justify-between py-3.5 border-b border-gray-100 text-sm text-gray-700"
+            >
+              お問い合わせ
+              <svg aria-hidden="true" focusable="false" className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
           </nav>
         </div>
       )}
