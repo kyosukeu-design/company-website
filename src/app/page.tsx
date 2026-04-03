@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import React from "react";
 import HeroSlideshow from "@/components/HeroSlideshow";
 
 const BASE_URL = "https://kyoei-shigyo.jp";
@@ -61,35 +62,62 @@ const stats = [
   { value: "50台+", label: "トラック保有台数", desc: "迅速・安定した回収体制を支える自社車両" },
 ];
 
+const industryIcons: Record<string, React.ReactNode> = {
+  "製造業": (
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+    </svg>
+  ),
+  "物流・倉庫業": (
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M8.25 18.75V6.375a1.125 1.125 0 011.125-1.125h4.5a1.125 1.125 0 011.125 1.125V18.75" />
+    </svg>
+  ),
+  "小売・スーパー": (
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72m-13.5 8.65h3.75a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75H6.75a.75.75 0 00-.75.75v3.75c0 .415.336.75.75.75z" />
+    </svg>
+  ),
+  "オフィス・企業": (
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m2.25-18h13.5m-13.5 0v18m13.5-18v18M9 6.75h6m-6 3h6m-6 3h6M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h8.25c.621 0 1.125.504 1.125 1.125V21" />
+    </svg>
+  ),
+  "病院・医療機関": (
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  ),
+  "学校・教育機関": (
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
+    </svg>
+  ),
+};
+
 const industries = [
   {
     name: "製造業",
-    icon: "🏭",
     cases: ["製造工程で生じる段ボール・梱包材の定期回収", "金属スクラップ・切削くずの回収・買取", "工場移転に伴う大量廃棄のスポット対応"],
   },
   {
     name: "物流・倉庫業",
-    icon: "🚛",
     cases: ["倉庫から発生する大量段ボールの定期回収", "梱包材・パレットのリサイクル対応", "複数拠点の一括管理・回収"],
   },
   {
     name: "小売・スーパー",
-    icon: "🛒",
     cases: ["店舗から毎日発生する段ボールの毎日回収", "食品トレー・プラスチック類の分別回収", "チェーン全店舗の統一管理"],
   },
   {
     name: "オフィス・企業",
-    icon: "🏢",
     cases: ["コピー用紙・書類の定期回収", "機密文書・個人情報書類の安全処理", "オフィス移転時の一括廃棄対応"],
   },
   {
     name: "病院・医療機関",
-    icon: "🏥",
     cases: ["患者記録・医療書類の機密廃棄", "段ボール・梱包材の定期回収", "処理証明書の定期発行"],
   },
   {
     name: "学校・教育機関",
-    icon: "🏫",
     cases: ["古紙・教材の定期回収", "図書・書籍の処分対応", "年度末の大量廃棄スポット対応"],
   },
 ];
@@ -190,8 +218,8 @@ export default function Home() {
                 </svg>
                 お問い合わせ・お見積り
               </Link>
-              <Link href="/flow" className="btn-outline text-sm px-6 py-3 !text-white !border-white hover:!bg-white hover:!text-green-800">
-                回収の流れを見る
+              <Link href="/pricing" className="btn-outline text-sm px-6 py-3 !text-white !border-white hover:!bg-white hover:!text-green-800">
+                料金を見る
                 <svg aria-hidden="true" focusable="false" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
@@ -337,7 +365,7 @@ export default function Home() {
             {industries.map((ind) => (
               <div key={ind.name} className="bg-gray-800 p-6 border-t-4 border-green-600">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="text-3xl">{ind.icon}</span>
+                  <span className="text-green-400">{industryIcons[ind.name]}</span>
                   <h3 className="font-bold text-white">{ind.name}</h3>
                 </div>
                 <ul className="space-y-2">
